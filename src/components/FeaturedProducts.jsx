@@ -47,11 +47,20 @@ export default function FeaturedProducts() {
   
   const scrollRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Smooth auto-scroll effect
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Smooth auto-scroll effect (disabled on mobile)
   useEffect(() => {
     let scrollInterval;
-    if (!isHovered && scrollRef.current) {
+    if (!isHovered && !isMobile && scrollRef.current) {
       scrollInterval = setInterval(() => {
         if (scrollRef.current) {
           scrollRef.current.scrollLeft += 1;
@@ -62,7 +71,7 @@ export default function FeaturedProducts() {
       }, 25);
     }
     return () => clearInterval(scrollInterval);
-  }, [isHovered]);
+  }, [isHovered, isMobile]);
 
   return (
     <section className="relative overflow-hidden bg-white py-32 lg:py-48">
@@ -117,12 +126,12 @@ export default function FeaturedProducts() {
 
           <div
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto pb-12 pt-4 scrollbar-hide snap-x snap-mandatory"
+            className={`flex gap-8 overflow-x-auto pb-12 pt-4 scrollbar-hide ${isMobile ? '' : 'snap-x snap-mandatory'}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onTouchStart={() => setIsHovered(true)}
             onTouchEnd={() => setIsHovered(false)}
-            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             {[...featuredProducts, ...featuredProducts].map((product, idx) => (
               <div
