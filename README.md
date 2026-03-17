@@ -1,21 +1,21 @@
-# 🥊 Venpa Sports Manufacturing
+# 🏃 Hempel Sports Manufacturing
 
-**Premium B2B Manufacturer of Combat Sports Equipment, Martial Arts Uniforms, and Leather Goods.**
+**Premium B2B Manufacturer of Performance Sportswear, Tracksuits, and Athletic Apparel.**
 
-Venpa Sports is a high-performance digital platform designed for a global manufacturing brand. It bridges the gap between premium product showcase and confidential B2B manufacturing partnerships through a streamlined, high-aesthetic user interface.
+Hempel Sports is a high-performance digital platform designed for a global manufacturing brand. It bridges the gap between premium product showcase and confidential B2B manufacturing partnerships through a streamlined, high-aesthetic user interface.
 
 ---
 
 ## ✨ Key Features
 
-- **🏆 Comprehensive Product Showcase**: Dedicated sections for Boxing Gloves, MMA Gear, Leather Jackets, Bags, and Gymnastic Shoes.
+- **🏆 Comprehensive Product Showcase**: Dedicated sections for Tracksuits, Jackets, Hoodies, and other athletic apparel.
 - **📝 Smart Quotation System**: A high-delivery-rate B2B request system featuring:
   - Multi-category selection with immediate visual feedback.
   - Dark-themed premium benefits sidebar with "Rapid Turnaround" and "NDA Policy" highlights.
   - Sticky context sidebar for enhanced desktop UX.
 - **🛡️ Secure Admin Panel**: A private, PIN-gated dashboard for managing categories, subcategories, and product inventory.
 - **⚡ High-Performance Architecture**: Built with Next.js 15+ and React 19, ensuring blazing fast load times and SEO optimization.
-- **🎨 Premium Combat Aesthetic**: Featuring a "Leather & Metal" inspired theme with deep blues, solid blacks, and metallic gold accents.
+- **🎨 Premium Athletic Aesthetic**: Featuring a modern sportswear theme with dynamic colors and professional design.
 
 ---
 
@@ -35,7 +35,7 @@ Venpa Sports is a high-performance digital platform designed for a global manufa
 ### 1. Clone & Install
 ```bash
 git clone <repository-url>
-cd venpa-sports
+cd hempel-sports
 npm install
 ```
 
@@ -80,4 +80,4 @@ Open [http://localhost:3000](http://localhost:3000) to see the site.
 
 ## 🛡️ License
 
-Confidential and Private. All rights reserved by **Venpa Sports Manufacturing**.
+Confidential and Private. All rights reserved by **Hempel Sports Manufacturing**.

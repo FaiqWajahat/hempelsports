@@ -2,7 +2,7 @@ import { connectDB } from "@/lib/mongodb";
 import Product from "@/models/Product";
 import { categories } from "@/data/categories";
 
-const SITE_URL = "https://venpasports.com";
+const SITE_URL = "https://hempelsports.com";
 
 export default async function sitemap() {
   // 1. Static Routes

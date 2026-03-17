@@ -247,7 +247,7 @@ export default function QuoteForm() {
             )}
           </button>
           <p className="text-xs text-[#999] mt-8 max-w-sm uppercase tracking-widest font-bold font-mono">
-            // SECURE B2B PORTAL. NDA ENFORCED.
+            SECURE B2B PORTAL. NDA ENFORCED.
           </p>
         </div>
 

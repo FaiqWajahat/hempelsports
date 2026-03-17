@@ -15,12 +15,13 @@ export default function SearchModal({ isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setQuery("");
+      setResults([]);
       setTimeout(() => inputRef.current?.focus(), 100);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
-      setQuery("");
-      setResults([]);
     }
     return () => {
       document.body.style.overflow = "unset";

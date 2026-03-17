@@ -25,7 +25,7 @@ export default function ContactHero() {
             </span>
           </h1>
           <p className="mt-8 mx-auto max-w-lg text-sm font-medium leading-relaxed text-white/50">
-            Communicate directly with our manufacturing floor. Whether you're inquiring about MOQs, lead times, or complex tech packs, we're here to assist.
+            Communicate directly with our manufacturing floor. Whether you&apos;re inquiring about MOQs, lead times, or complex tech packs, we&apos;re here to assist.
           </p>
         </motion.div>
       </div>

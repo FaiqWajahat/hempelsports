@@ -34,7 +34,7 @@ export default function AboutStory() {
                 Hempel Sports was founded on a singular principle: to bridge the gap between world-class brand visions and the reality of complex manufacturing. Located in Sialkot, Pakistan — the global epicenter of performance textiles — we operate a modern, vertically integrated studio.
               </p>
               <p>
-                We don't just stitch fabrics. We engineer solutions. From developing custom technical fleece for heavyweight hoodies to precise sublimation for elite club tracksuits, our production lines are calibrated for absolute consistency.
+                We don&apos;t just stitch fabrics. We engineer solutions. From developing custom technical fleece for heavyweight hoodies to precise sublimation for elite club tracksuits, our production lines are calibrated for absolute consistency.
               </p>
               <p>
                 Over the past decade, Hempel has scaled from a boutique artisan workshop to a high-capacity export powerhouse, shipping premium sportswear to over 50 countries without compromising the meticulous craftsmanship that built our name.

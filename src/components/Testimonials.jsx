@@ -51,7 +51,7 @@ export default function Testimonials() {
           
           {/* Huge decorative quotation mark */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none opacity-5">
-            <span className="text-[200px] font-serif leading-none text-black">"</span>
+            <span className="text-[200px] font-serif leading-none text-black">&quot;</span>
           </div>
 
           <AnimatePresence mode="wait">
