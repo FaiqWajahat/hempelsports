@@ -113,7 +113,7 @@ export default function AddProductModal({ onClose, onAdded }) {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="e.g. Elite Pro Leather Gloves"
+              placeholder="e.g. Elite Pro Tracksuit"
               className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 placeholder-zinc-600 outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/30"
             />
           </div>

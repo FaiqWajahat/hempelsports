@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
 export default function WhatsAppWidget() {
-  const phoneNumber = "923226798594";
+  const phoneNumber = "923196351376";
   const defaultMessage = "Hi Hempel Sports, I'm interested in your manufacturing services for tracksuits and jackets. Can we discuss a project?";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     defaultMessage,
@@ -22,7 +22,7 @@ export default function WhatsAppWidget() {
       aria-label="Chat on WhatsApp"
     >
       <MessageCircle className="h-6 w-6 lg:h-8 lg:w-8" strokeWidth={1.5} />
-      
+
       {/* Tooltip effect */}
       <span className="absolute right-full mr-4 whitespace-nowrap bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black opacity-0 shadow-lg transition-all duration-300 group-hover:-translate-x-2 group-hover:opacity-100 border border-black/10">
         Direct Factory Contact

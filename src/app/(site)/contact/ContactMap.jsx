@@ -18,7 +18,7 @@ export default function ContactMap() {
               Our Location
             </h2>
             <p className="mt-4 text-base text-zinc-500 max-w-2xl mx-auto lg:mx-0">
-              Located in the heart of Sialkot, the global capital of sports manufacturing. We welcome existing partners to visit our facilities by appointment.
+              Our headquarters are located in Okara, Pakistan. We welcome business partners to visit our office by appointment to discuss custom manufacturing projects.
             </p>
           </motion.div>
         </div>
@@ -31,14 +31,14 @@ export default function ContactMap() {
           className="relative h-[400px] sm:h-[500px] w-full overflow-hidden rounded-[32px] shadow-lg border border-zinc-200"
         >
           <iframe 
-            src="https://maps.google.com/maps?q=MOH.+SHARIF+PURA,+P.O+KHAS,+UGOKI,+SIALKOT,+Pakistan&output=embed" 
+            src="https://maps.google.com/maps?q=House+No.30+Street+No.01+X-Block+Government+Colony+Okara,+Pakistan&output=embed" 
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
             allowFullScreen="" 
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
-            title="Venpa Sports Manufacturing Location, Sialkot"
+            title="Hempel Sports Location, Okara"
             className="grayscale contrast-125 opacity-90 transition-all hover:grayscale-0 hover:opacity-100 duration-700"
           ></iframe>
         </motion.div>

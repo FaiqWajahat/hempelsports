@@ -9,7 +9,7 @@ const contactDetails = [
     icon: <MapPin className="h-6 w-6" strokeWidth={1.5} />,
     title: "Global Headquarters",
     value: "Hempel Studios",
-    subtext: "MOH. SHARIF PURA, P.O KHAS\nUGOKI, SIALKOT, Pakistan",
+    subtext: "House No.30 Street No.01\nX-Block Government Colony Okara",
     href: null
   },
   {
@@ -22,9 +22,9 @@ const contactDetails = [
   {
     icon: <Phone className="h-6 w-6" strokeWidth={1.5} />,
     title: "Phone / WhatsApp",
-    value: "+92 322 6798594",
+    value: "+92 319 6351376",
     subtext: "Global Communications\nMon-Sat, 9am - 6pm (PKT)",
-    href: "tel:+923226798594"
+    href: "https://wa.me/923196351376"
   }
 ];
 

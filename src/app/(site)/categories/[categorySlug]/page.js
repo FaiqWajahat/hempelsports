@@ -9,7 +9,7 @@ export async function generateMetadata({ params }) {
   const category = getCategoryBySlug(resolvedParams.categorySlug);
   if (!category) return { title: "Not Found" };
   return {
-    title: `${category.name} | Venpa Sports`,
+    title: `${category.name} | Hempel Sports`,
     description: category.shortDescription,
   };
 }

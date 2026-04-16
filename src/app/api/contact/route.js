@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { connectDB } from "@/lib/mongodb";
-import Quote from "@/models/Quote";
+import Inquiry from "@/models/Inquiry";
 
 export async function POST(req) {
   try {
@@ -11,16 +11,12 @@ export async function POST(req) {
       companyName,
       email,
       phone,
-      country,
-      categories,
-      quantity,
-      deliveryDate,
-      projectDescription,
-      productSku,
+      inquiryType,
+      message,
     } = data;
 
     // Validate essential fields
-    if (!fullName || !email || !phone || !projectDescription) {
+    if (!fullName || !email || !inquiryType || !message) {
       return NextResponse.json(
         { message: "Missing required fields" },
         { status: 400 }
@@ -30,22 +26,16 @@ export async function POST(req) {
     // 1. Save to MongoDB
     try {
       await connectDB();
-      await Quote.create({
+      await Inquiry.create({
         fullName,
         companyName,
         email,
         phone,
-        country,
-        categories,
-        quantity,
-        deliveryDate,
-        projectDescription,
-        productSku,
+        inquiryType,
+        message,
       });
     } catch (dbErr) {
       console.error("Database Save Error:", dbErr);
-      // We continue to send email even if DB fails, or vice versa? 
-      // Usually, it's better to ensure DB is saved.
     }
 
     // 2. Configure Nodemailer transporter
@@ -76,43 +66,35 @@ export async function POST(req) {
     // Format the email content
     const htmlContent = `
       <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;">
-        <h2 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">New Quote Request — Hempel Sports</h2>
+        <h2 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">New Inquiry — Hempel Sports</h2>
         <p><strong>From:</strong> ${fullName} ${companyName ? `(${companyName})` : ""}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Country:</strong> ${country}</p>
+        <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
+        <p><strong>Inquiry Type:</strong> <span style="text-transform: uppercase;">${inquiryType}</span></p>
         <hr style="border: 0; border-top: 1px solid #eee;" />
-        <h3 style="color: #333;">Project Scope</h3>
-        ${productSku ? `<p><strong>Reference SKU:</strong> ${productSku}</p>` : ""}
-        <p><strong>Categories:</strong> ${categories && categories.length > 0 ? categories.join(", ") : "None specified"}</p>
-        <p><strong>Quantity:</strong> ${quantity || "Not specified"}</p>
-        <p><strong>Target Delivery:</strong> ${deliveryDate || "Not specified"}</p>
-        <hr style="border: 0; border-top: 1px solid #eee;" />
-        <h3 style="color: #333;">Technical Requirements</h3>
-        <p style="white-space: pre-wrap; background: #f9f9f9; padding: 15px; border-radius: 8px;">${projectDescription}</p>
-        <p style="font-size: 10px; color: #999; margin-top: 30px;">Hempel Sports B2B Manufacturing Portal</p>
+        <h3 style="color: #333;">Message Details</h3>
+        <p style="white-space: pre-wrap; background: #f9f9f9; padding: 15px; border-radius: 8px;">${message}</p>
+        <p style="font-size: 10px; color: #999; margin-top: 30px;">Hempel Sports Customer Relations</p>
       </div>
     `;
 
-    // Send the email to the admin (contact@hempelsports.com)
-    const info = await transporter.sendMail({
+    // Send the email to the admin
+    await transporter.sendMail({
       from: `"Hempel Sports" <${process.env.SMTP_USER}>`,
       to: process.env.SMTP_USER,
-      subject: `[QUOTE] ${fullName} - ${productSku ? `SKU: ${productSku}` : "Custom Project"}`,
+      subject: `[INQUIRY] ${fullName} - ${inquiryType}`,
       html: htmlContent,
       replyTo: email,
     });
 
-    console.log("Email sent successfully. Message ID:", info.messageId);
-
     return NextResponse.json(
-      { message: "Quote request sent successfully" },
+      { message: "Inquiry sent successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error sending quote email:", error);
+    console.error("Error sending contact email:", error);
     return NextResponse.json(
-      { message: "Failed to send quote request", error: error.message },
+      { message: "Failed to send inquiry", error: error.message },
       { status: 500 }
     );
   }

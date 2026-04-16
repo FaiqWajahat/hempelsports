@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Admin Console — Venpa Sports",
-  description: "Admin dashboard for managing Venpa Sports catalog.",
+  title: "Admin Console — Hempel Sports",
+  description: "Admin dashboard for managing Hempel Sports catalog.",
 };
 
 export default function AdminLayout({ children }) {
@@ -13,7 +13,7 @@ export default function AdminLayout({ children }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
           <Link href="/admin" className="flex flex-col leading-tight">
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-red-500">
-              Venpa Sports
+              Hempel Sports
             </span>
             <span className="text-sm font-bold text-zinc-200">Admin Console</span>
           </Link>

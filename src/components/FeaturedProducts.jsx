@@ -5,43 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
-// Placeholder featured products mapped to the new tracksuits/jackets theme
-const featuredProducts = [
-  {
-    slug: "performance-tracksuit-pro",
-    name: "Performance Tracksuit Pro",
-    categorySlug: "tracksuits",
-    image: "/category-tracksuit.png",
-    tag: "Bestseller",
-    description: "Moisture-wicking technical fabric with tailored fit."
-  },
-  {
-    slug: "stealth-bomber-jacket",
-    name: "Stealth Bomber Jacket",
-    categorySlug: "jackets",
-    image: "/category-jacket.png",
-    tag: "New Arrival",
-    description: "Insulated lightweight bomber with matte finish hardware."
-  },
-  {
-    slug: "elite-team-kit",
-    name: "Elite Team Kit",
-    categorySlug: "team-uniforms",
-    image: "/category-teamwear.png",
-    tag: "Customizable",
-    description: "Full sublimated matching kit for top-tier clubs."
-  },
-  {
-    slug: "heavyweight-pullover-hoodie",
-    name: "Heavyweight Pullover Hoodie",
-    categorySlug: "hoodies",
-    image: "/category-hoodie.png",
-    tag: "Premium",
-    description: "450gsm fleece cotton with structured hood."
-  }
-];
-
-export default function FeaturedProducts() {
+export default function FeaturedProducts({ products = [] }) {
+  const featuredProducts = products.length > 0 ? products : [];
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   
@@ -72,6 +37,11 @@ export default function FeaturedProducts() {
     }
     return () => clearInterval(scrollInterval);
   }, [isHovered, isMobile]);
+
+  if (featuredProducts.length === 0) return null;
+
+  // Double the products for the looping effect only if we want auto-scroll
+  const displayProducts = featuredProducts.length > 2 ? [...featuredProducts, ...featuredProducts] : featuredProducts;
 
   return (
     <section className="relative overflow-hidden bg-white py-32 lg:py-48">
@@ -133,48 +103,51 @@ export default function FeaturedProducts() {
             onTouchEnd={() => setIsHovered(false)}
             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           >
-            {[...featuredProducts, ...featuredProducts].map((product, idx) => (
-              <div
-                key={`${product.slug}-${idx}`}
-                className="group w-[85vw] sm:w-[500px] shrink-0 snap-center"
-              >
-                <Link href={`/products/${product.slug}`} className="block">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#fafafa]">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover object-center transition-transform duration-1000 ease-[0.16,1,0.3,1] group-hover:scale-105"
-                    />
-                    
-                    {/* Tag Label */}
-                    <div className="absolute top-6 left-6 z-10">
-                      <span className="bg-white px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-black shadow-none border border-black/10">
-                        {product.tag}
+            {displayProducts.map((product, idx) => {
+              const tag = product.isNew ? "New Arrival" : product.isBestseller ? "Bestseller" : "Featured";
+              return (
+                <div
+                  key={`${product.slug}-${idx}`}
+                  className="group w-[85vw] sm:w-[500px] shrink-0 snap-center"
+                >
+                  <Link href={`/products/${product.slug}`} className="block">
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#fafafa]">
+                      <Image
+                        src={product.image || "/placeholder.png"}
+                        alt={product.name}
+                        fill
+                        className="object-cover object-center transition-transform duration-1000 ease-[0.16,1,0.3,1] group-hover:scale-105"
+                      />
+                      
+                      {/* Tag Label */}
+                      <div className="absolute top-6 left-6 z-10">
+                        <span className="bg-white px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-black shadow-none border border-black/10">
+                          {tag}
+                        </span>
+                      </div>
+  
+                      {/* Dark Hover Overlay */}
+                      <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/5" />
+                    </div>
+  
+                    <div className="mt-6 flex justify-between items-start">
+                      <div>
+                        <h3 className="text-xl font-bold uppercase tracking-tight text-black transition-colors group-hover:text-[var(--color-primary)]">
+                          {product.name}
+                        </h3>
+                        <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-[#999]">
+                          {product.categorySlug}
+                        </p>
+                      </div>
+                      
+                      <span className="border border-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black transition-all group-hover:bg-black group-hover:text-white">
+                        Details
                       </span>
                     </div>
-
-                    {/* Dark Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/5" />
-                  </div>
-
-                  <div className="mt-6 flex justify-between items-start">
-                    <div>
-                      <h3 className="text-xl font-bold uppercase tracking-tight text-black transition-colors group-hover:text-[var(--color-primary)]">
-                        {product.name}
-                      </h3>
-                      <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-[#999]">
-                        {product.categorySlug}
-                      </p>
-                    </div>
-                    
-                    <span className="border border-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black transition-all group-hover:bg-black group-hover:text-white">
-                      Details
-                    </span>
-                  </div>
-                </Link>
-              </div>
-            ))}
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
 

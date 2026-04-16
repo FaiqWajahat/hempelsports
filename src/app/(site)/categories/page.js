@@ -3,8 +3,8 @@ import CategoriesGrid from "./CategoriesGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
-  title: "Shop Categories | Venpa Sports Manufacturing",
-  description: "Browse premium manufactured combat sports equipment by category: Boxing, MMA, Protective Gear, and BJJ Apparel.",
+  title: "Product Categories | Hempel Sports",
+  description: "Browse the full manufacturing catalog of Hempel Sports, from custom tracksuits to sports uniforms.",
 };
 
 import { getProductCounts } from "@/lib/countUtils";

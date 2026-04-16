@@ -4,8 +4,8 @@ import QuoteForm from "./QuoteForm";
 import QuoteBenefits from "./QuoteBenefits";
 
 export const metadata = {
-  title: "Request a Quote | Venpa Sports Manufacturing",
-  description: "Request a custom manufacturing quote for boxing, MMA, and martial arts equipment from Venpa Sports.",
+  title: "Get a Quotation | Hempel Sports",
+  description: "Request a custom manufacturing quote from Hempel Sports for tracksuits, jackets, and team kits.",
 };
 
 export default function QuotePage() {

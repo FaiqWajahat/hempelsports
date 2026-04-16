@@ -6,8 +6,8 @@ import AboutValues from "./AboutValues";
 import AboutCTA from "./AboutCTA";
 
 export const metadata = {
-  title: "About Us | Venpa Sports Manufacturing",
-  description: "Learn about Venpa Sports, a premier manufacturer of custom professional boxing, MMA, and martial arts equipment based in Sialkot, Pakistan.",
+  title: "About Hempel Sports | Manufacturing Excellence",
+  description: "Learn about Hempel Sports, our manufacturing history, and our commitment to premium sportswear production.",
 };
 
 export default function AboutPage() {

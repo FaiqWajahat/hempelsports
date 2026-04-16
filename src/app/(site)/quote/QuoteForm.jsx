@@ -79,7 +79,7 @@ export default function QuoteForm() {
         </div>
         <h3 className="text-3xl font-black text-zinc-900 tracking-tight">Quotation Sent!</h3>
         <p className="mt-4 max-w-md text-base leading-relaxed text-zinc-500">
-          Your quotation has been sent successfully, and we will respond to you shortly. Thank you for choosing Venpa Sports.
+          Your quotation has been sent successfully, and we will respond to you shortly. Thank you for choosing Hempel Sports.
         </p>
         <button
           onClick={() => setStatus("idle")}

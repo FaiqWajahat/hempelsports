@@ -64,7 +64,7 @@ export default function PinGate({ onSuccess }) {
       {/* Brand */}
       <div className="mb-10 flex flex-col items-center gap-1">
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-red-500">
-          Venpa Sports
+          Hempel Sports
         </span>
         <h1 className="text-2xl font-extrabold tracking-tight text-zinc-100">
           Admin Console

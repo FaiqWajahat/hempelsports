@@ -48,8 +48,8 @@ export default function Footer() {
               A premium B2B sportswear manufacturing studio. Designing and scaling global brands with uncompromising quality and absolute precision.
             </p>
             
-            <a 
-              href="mailto:info@hempelsports.com" 
+            <Link 
+              href="/quote" 
               className="group mt-10 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-colors hover:text-[var(--color-primary)]"
             >
               Start a Project
@@ -58,7 +58,7 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Minimalist Link Grid */}

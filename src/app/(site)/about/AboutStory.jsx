@@ -26,12 +26,12 @@ export default function AboutStory() {
               Our Legacy
             </p>
             <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase tracking-tighter leading-[0.9] text-black mb-12">
-              BORN IN<br />SIALKOT.
+              BORN IN<br />OKARA.
             </h2>
             
             <div className="space-y-8 text-sm font-medium leading-relaxed text-[#555]">
               <p>
-                Hempel Sports was founded on a singular principle: to bridge the gap between world-class brand visions and the reality of complex manufacturing. Located in Sialkot, Pakistan — the global epicenter of performance textiles — we operate a modern, vertically integrated studio.
+                Hempel Sports was founded on a singular principle: to bridge the gap between world-class brand visions and the reality of complex manufacturing. Located in Okara, Pakistan — a growing hub of industrial excellence — we operate a modern, vertically integrated studio.
               </p>
               <p>
                 We don&apos;t just stitch fabrics. We engineer solutions. From developing custom technical fleece for heavyweight hoodies to precise sublimation for elite club tracksuits, our production lines are calibrated for absolute consistency.

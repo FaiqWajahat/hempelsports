@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, X, Loader2 } from "lucide-react";
+import { Search, X, Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { categories } from "@/data/categories";
 
 export default function SearchModal({ isOpen, onClose }) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -15,7 +16,6 @@ export default function SearchModal({ isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuery("");
       setResults([]);
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -29,41 +29,36 @@ export default function SearchModal({ isOpen, onClose }) {
   }, [isOpen]);
 
   useEffect(() => {
-    const searchTimer = setTimeout(() => {
-      if (query.length < 2) {
+    const searchTimer = setTimeout(async () => {
+      if (query.trim().length < 2) {
         setResults([]);
         setIsSearching(false);
         return;
       }
 
       setIsSearching(true);
-      const searchTerms = query.toLowerCase().split(" ");
-      const found = [];
-
-      categories.forEach((cat) => {
-        cat.subcategories?.forEach((sub) => {
-          sub.products?.forEach((product) => {
-            const searchText = `${product.name} ${product.description} ${cat.name} ${sub.name}`.toLowerCase();
-            const matchesAll = searchTerms.every(term => searchText.includes(term));
-            
-            if (matchesAll) {
-              found.push({
-                ...product,
-                categorySlug: cat.slug,
-                categoryName: cat.name,
-                subcategorySlug: sub.slug
-              });
-            }
-          });
-        });
-      });
-
-      setResults(found.slice(0, 8));
-      setIsSearching(false);
-    }, 300);
+      try {
+        const res = await fetch(`/api/products/search?q=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error("Search failed");
+        const data = await res.json();
+        setResults(data.results || []);
+      } catch (err) {
+        console.error("Live Search Error:", err);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 400);
 
     return () => clearTimeout(searchTimer);
   }, [query]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && query.trim().length >= 2) {
+      e.preventDefault();
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+      onClose();
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -95,9 +90,10 @@ export default function SearchModal({ isOpen, onClose }) {
                 <input
                   ref={inputRef}
                   type="text"
-                  placeholder="Search tracksuits, jackets, hoodies..."
+                  placeholder="Search Hempel Sports products..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="mx-6 w-full bg-transparent text-xl font-medium tracking-tight text-black placeholder:text-black/30 placeholder:font-normal focus:outline-none sm:text-3xl"
                 />
                 <button
@@ -115,42 +111,54 @@ export default function SearchModal({ isOpen, onClose }) {
                   <div className="flex h-48 items-center justify-center">
                     <Loader2 className="h-8 w-8 animate-spin text-[var(--color-primary)]" />
                   </div>
-                ) : query.length >= 2 ? (
+                ) : query.trim().length >= 2 ? (
                   results.length > 0 ? (
-                    <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
-                      {results.map((product) => (
-                        <Link
-                          key={product.slug}
-                          href={`/products/${product.slug}`}
-                          onClick={onClose}
-                          className="group flex items-center gap-6 border-b border-black/5 p-6 transition-colors hover:bg-[#fafafa]"
-                        >
-                          <div className="relative h-20 w-16 shrink-0 overflow-hidden bg-[#f5f5f5]">
-                            {product.image && (
-                              <Image
-                                src={product.image}
-                                alt={product.name}
-                                fill
-                                className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                              />
-                            )}
-                          </div>
-                          <div>
-                            <p className="text-[9px] font-bold uppercase tracking-widest text-[#999] mb-1">
-                              {product.categoryName}
-                            </p>
-                            <h4 className="text-sm font-bold uppercase tracking-tight text-black group-hover:text-[var(--color-primary)] transition-colors line-clamp-1">
-                              {product.name}
-                            </h4>
-                          </div>
-                        </Link>
-                      ))}
+                    <div className="flex flex-col">
+                      <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
+                        {results.map((product) => (
+                          <Link
+                            key={product.slug}
+                            href={`/products/${product.slug}`}
+                            onClick={onClose}
+                            className="group flex items-center gap-6 border-b border-black/5 p-6 transition-colors hover:bg-[#fafafa]"
+                          >
+                            <div className="relative h-20 w-16 shrink-0 overflow-hidden bg-[#f5f5f5]">
+                              {product.image && (
+                                <Image
+                                  src={product.image}
+                                  alt={product.name}
+                                  fill
+                                  className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                                />
+                              )}
+                            </div>
+                            <div>
+                              <p className="text-[9px] font-bold uppercase tracking-widest text-[#999] mb-1">
+                                {product.categorySlug}
+                              </p>
+                              <h4 className="text-sm font-bold uppercase tracking-tight text-black group-hover:text-[var(--color-primary)] transition-colors line-clamp-1">
+                                {product.name}
+                              </h4>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      
+                      {/* See All Footnote */}
+                      <Link
+                        href={`/search?q=${encodeURIComponent(query)}`}
+                        onClick={onClose}
+                        className="flex items-center justify-center gap-2 border-t border-black/5 py-6 text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-colors hover:bg-black hover:text-white"
+                      >
+                        See All Results for &quot;{query}&quot;
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
                     </div>
                   ) : (
                     <div className="flex h-48 flex-col items-center justify-center text-center px-6">
                       <p className="text-lg font-bold text-black uppercase tracking-tight mb-2">No results found</p>
                       <p className="text-sm text-zinc-500">
-                        Try searching for &quot;tracksuit&quot;, &quot;fleece&quot;, or &quot;bomber jacket&quot;.
+                        Try searching for &quot;tracksuit&quot;, &quot;jacket&quot;, or &quot;hoodie&quot;.
                       </p>
                     </div>
                   )
@@ -162,7 +170,7 @@ export default function SearchModal({ isOpen, onClose }) {
                   <div className="bg-[#fafafa] p-8">
                     <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999] mb-6">Popular Searches</h3>
                     <div className="flex flex-wrap gap-3">
-                      {["Tracksuits", "Bomber Jackets", "Performance Hoodies", "Team Kits"].map((term) => (
+                      {["Tracksuit", "Bomber", "Hoodie", "Custom Kit"].map((term) => (
                         <button
                           key={term}
                           onClick={() => setQuery(term)}

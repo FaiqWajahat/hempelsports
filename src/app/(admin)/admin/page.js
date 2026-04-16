@@ -6,7 +6,7 @@ import AdminLogout from "@/components/admin/AdminLogout";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Admin Console — Venpa Sports",
+  title: "Admin Console — Hempel Sports",
 };
 
 export default async function AdminPage() {

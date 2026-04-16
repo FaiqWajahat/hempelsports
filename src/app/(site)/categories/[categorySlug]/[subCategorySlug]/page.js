@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
   const category = getCategoryBySlug(resolvedParams.categorySlug);
 
   if (!category) {
-    return { title: "Category Not Found | Venpa Sports" };
+    return { title: "Category Not Found | Hempel Sports" };
   }
 
   const subcategory =
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
       );
 
   return {
-    title: `${subName} | ${category.name} | Venpa Sports `,
+    title: `${subName} | ${category.name} | Hempel Sports `,
     description: category.description,
   };
 }

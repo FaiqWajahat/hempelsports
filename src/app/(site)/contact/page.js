@@ -5,8 +5,8 @@ import ContactMap from "./ContactMap";
 import ContactFAQ from "./ContactFAQ";
 
 export const metadata = {
-  title: "Contact Us | Venpa Sports Manufacturing",
-  description: "Get in touch with Venpa Sports for OEM/ODM manufacturing inquiries, bulk orders, and custom martial arts equipment quotes.",
+  title: "Contact Us | Hempel Sports",
+  description: "Get in touch with Hempel Sports for wholesale inquiries, custom manufacturing quotes, and B2B sportswear partnerships.",
 };
 
 export default function ContactPage() {

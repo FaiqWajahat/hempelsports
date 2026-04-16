@@ -6,14 +6,34 @@ import { useState } from "react";
 export default function ContactForm() {
   const [status, setStatus] = useState("idle"); // idle | submitting | success
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("submitting");
     
-    // Simulate API call for the mockup
-    setTimeout(() => {
+    const formData = new FormData(e.target);
+    const data = {
+      fullName: formData.get("name"),
+      companyName: formData.get("company"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      inquiryType: formData.get("type"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Failed to send inquiry.");
       setStatus("success");
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again later.");
+      setStatus("idle");
+    }
   };
 
   if (status === "success") {
@@ -30,7 +50,7 @@ export default function ContactForm() {
         </div>
         <h3 className="text-2xl font-bold text-zinc-900">Inquiry Sent Successfully</h3>
         <p className="mt-4 max-w-sm text-zinc-500">
-          Thank you for reaching out to Venpa Sports. One of our manufacturing specialists will contact you within 24 hours.
+          Thank you for reaching out to Hempel Sports. One of our manufacturing specialists will contact you within 24 hours.
         </p>
         <button
           onClick={() => setStatus("idle")}
@@ -60,6 +80,7 @@ export default function ContactForm() {
             <input
               type="text"
               id="name"
+              name="name"
               required
               className="w-full border-b border-black/20 bg-transparent py-4 text-sm font-medium text-black transition-all hover:border-black focus:border-[var(--color-primary)] focus:outline-none placeholder:text-black/40"
               placeholder="John Doe"
@@ -70,6 +91,7 @@ export default function ContactForm() {
             <input
               type="text"
               id="company"
+              name="company"
               className="w-full border-b border-black/20 bg-transparent py-4 text-sm font-medium text-black transition-all hover:border-black focus:border-[var(--color-primary)] focus:outline-none placeholder:text-black/40"
               placeholder="Your Brand Name"
             />
@@ -83,6 +105,7 @@ export default function ContactForm() {
             <input
               type="email"
               id="email"
+              name="email"
               required
               className="w-full border-b border-black/20 bg-transparent py-4 text-sm font-medium text-black transition-all hover:border-black focus:border-[var(--color-primary)] focus:outline-none placeholder:text-black/40"
               placeholder="john@company.com"
@@ -93,6 +116,7 @@ export default function ContactForm() {
             <input
               type="tel"
               id="phone"
+              name="phone"
               className="w-full border-b border-black/20 bg-transparent py-4 text-sm font-medium text-black transition-all hover:border-black focus:border-[var(--color-primary)] focus:outline-none placeholder:text-black/40"
               placeholder="+1 (555) 000-0000"
             />
@@ -105,6 +129,7 @@ export default function ContactForm() {
           <div className="relative">
             <select
               id="type"
+              name="type"
               required
               className="w-full appearance-none border-b border-black/20 bg-transparent py-4 text-sm font-medium text-black transition-all hover:border-black focus:border-[var(--color-primary)] focus:outline-none"
             >
@@ -127,6 +152,7 @@ export default function ContactForm() {
           <label htmlFor="message" className="mb-2 block text-xs font-bold uppercase tracking-widest text-zinc-500">Message / Details *</label>
           <textarea
             id="message"
+            name="message"
             required
             rows={5}
             className="w-full resize-y border-b border-black/20 bg-transparent py-4 text-sm font-medium text-black transition-all hover:border-black focus:border-[var(--color-primary)] focus:outline-none placeholder:text-black/40 min-h-[150px]"

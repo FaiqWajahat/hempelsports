@@ -17,7 +17,7 @@ export default function ProductDetailDisplay({ product }) {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_100%)]" />
         </div>
-        
+
         <div className="relative z-10 w-full max-w-7xl px-5 lg:px-8 flex flex-col items-center text-center">
           <h1 className="text-[clamp(2.5rem,4vw,4rem)] font-black uppercase tracking-tighter leading-[0.9] text-white">
             {product.name}
@@ -27,13 +27,13 @@ export default function ProductDetailDisplay({ product }) {
 
       {/* Dark Breadcrumbs */}
       <div className="bg-black">
-        <Breadcrumbs 
+        <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
             { label: "Categories", href: "/categories" },
             { label: (product.categorySlug.charAt(0).toUpperCase() + product.categorySlug.slice(1)).replace(/-/g, ' '), href: `/categories/${product.categorySlug}` },
             { label: product.name }
-          ]} 
+          ]}
           isDark={true}
         />
       </div>
@@ -58,18 +58,18 @@ export default function ProductDetailDisplay({ product }) {
                   transition={{ duration: 0.4 }}
                   className="absolute inset-0"
                 >
-                    <Image
-                      src={product.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect fill='%23e4e4e7' width='400' height='400'/%3E%3Ctext fill='%239ca3af' font-family='sans-serif' font-size='14' x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle'%3ENo image%3C/text%3E%3C/svg%3E"}
-                      alt={`${product.name} view ${activeImage + 1}`}
-                      fill
-                      priority
-                      className="object-cover object-center"
-                    />
+                  <Image
+                    src={product.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect fill='%23e4e4e7' width='400' height='400'/%3E%3Ctext fill='%239ca3af' font-family='sans-serif' font-size='14' x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle'%3ENo image%3C/text%3E%3C/svg%3E"}
+                    alt={`${product.name} view ${activeImage + 1}`}
+                    fill
+                    priority
+                    className="object-cover object-center"
+                  />
                 </motion.div>
               </AnimatePresence>
             </motion.div>
 
-          
+
           </div>
 
           {/* Right Column: Product Details & CTAs */}
@@ -130,7 +130,7 @@ export default function ProductDetailDisplay({ product }) {
               </Link>
 
               <a
-                href={`https://wa.me/923226798594?text=Hello,%20I%20am%20interested%20in%20manufacturing%20the%20${product.name}%20(SKU:%20${product.sku}).`}
+                href={`https://wa.me/923196351376?text=Hello,%20I%20am%20interested%20in%20manufacturing%20the%20${product.name}%20(SKU:%20${product.sku}).`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-[0.3] flex flex-col items-center justify-center border border-black/20 bg-transparent py-5 text-black transition-colors hover:border-black hover:bg-black hover:text-white"
