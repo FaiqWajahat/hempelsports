@@ -122,13 +122,13 @@ export default function SearchModal({ isOpen, onClose }) {
                             onClick={onClose}
                             className="group flex items-center gap-6 border-b border-black/5 p-6 transition-colors hover:bg-[#fafafa]"
                           >
-                            <div className="relative h-20 w-16 shrink-0 overflow-hidden bg-[#f5f5f5]">
+                            <div className="relative h-20 w-16 shrink-0 overflow-hidden bg-white">
                               {product.image && (
                                 <Image
                                   src={product.image}
                                   alt={product.name}
                                   fill
-                                  className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                                  className="object-contain object-center transition-transform duration-500 group-hover:scale-110"
                                 />
                               )}
                             </div>

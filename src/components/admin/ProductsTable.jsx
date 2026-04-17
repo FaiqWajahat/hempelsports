@@ -30,15 +30,18 @@ export default function ProductsTable({ initialProducts }) {
     setDeleting(true);
     try {
       const res = await fetch(`/api/admin/products/${id}`, { method: "DELETE" });
+      const data = await res.json();
+
       if (res.ok) {
         // Match by _id (MongoDB string) or id
         setProducts((prev) => prev.filter((p) => (p._id ?? p.id) !== id));
         showToast("Product deleted successfully.");
       } else {
-        showToast("Failed to delete product.", "error");
+        const errorMsg = data.detail || data.error || "Unknown error";
+        showToast(`Deletion failed: ${errorMsg}`, "error");
       }
     } catch {
-      showToast("Network error.", "error");
+      showToast("Network error or server crash.", "error");
     } finally {
       setDeleting(false);
       setDeleteId(null);

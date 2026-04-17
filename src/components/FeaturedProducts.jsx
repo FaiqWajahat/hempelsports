@@ -111,38 +111,40 @@ export default function FeaturedProducts({ products = [] }) {
                   className="group w-[85vw] sm:w-[500px] shrink-0 snap-center"
                 >
                   <Link href={`/products/${product.slug}`} className="block">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#fafafa]">
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-white transition-colors duration-700">
                       <Image
                         src={product.image || "/placeholder.png"}
                         alt={product.name}
                         fill
-                        className="object-cover object-center transition-transform duration-1000 ease-[0.16,1,0.3,1] group-hover:scale-105"
+                        className="object-contain object-center p-4 transition-transform duration-1000 ease-[0.16,1,0.3,1] group-hover:scale-110"
                       />
                       
                       {/* Tag Label */}
                       <div className="absolute top-6 left-6 z-10">
-                        <span className="bg-white px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-black shadow-none border border-black/10">
+                        <span className="bg-white px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.2em] text-black shadow-none border border-black/10">
                           {tag}
                         </span>
                       </div>
   
-                      {/* Dark Hover Overlay */}
-                      <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/5" />
+                      {/* No Dark Hover Overlay for better product visibility */}
                     </div>
   
-                    <div className="mt-6 flex justify-between items-start">
+                    <div className="mt-8 flex justify-between items-end">
                       <div>
-                        <h3 className="text-xl font-bold uppercase tracking-tight text-black transition-colors group-hover:text-[var(--color-primary)]">
+                        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+                          {product.categorySlug?.replace(/-/g, ' ')}
+                        </p>
+                        <h3 className="text-2xl font-black uppercase tracking-tighter text-black transition-colors group-hover:text-[var(--color-primary)] leading-none">
                           {product.name}
                         </h3>
-                        <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-[#999]">
-                          {product.categorySlug}
-                        </p>
                       </div>
                       
-                      <span className="border border-black px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black transition-all group-hover:bg-black group-hover:text-white">
-                        Details
-                      </span>
+                      <div className="flex items-center gap-2 group/btn">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-black">
+                          Details
+                        </span>
+                        <div className="h-[1px] w-4 bg-black transition-all duration-500 group-hover/btn:w-8 group-hover/btn:bg-[var(--color-primary)]" />
+                      </div>
                     </div>
                   </Link>
                 </div>
