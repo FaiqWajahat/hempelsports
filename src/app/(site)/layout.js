@@ -9,11 +9,11 @@ export default async function SiteLayout({ children }) {
 
   return (
     <div className="flex min-h-screen flex-col bg-white text-zinc-950">
-      {/* <StoreInitializer products={products} />
-      <Navbar /> */}
+      <StoreInitializer products={products} />
+      <Navbar />
       <main className="flex flex-1 flex-col">{children}</main>
-      {/* <Footer />
-      <WhatsAppWidget /> */}
+      <Footer />
+      <WhatsAppWidget />
     </div>
   );
 }
